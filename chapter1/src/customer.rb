@@ -16,13 +16,9 @@ class Customer
     total_amount, frequent_renter_points = 0, 0
     result = "Rental Record for #{name}\n"
     @rentals.each do |rental|
-      frequent_renter_points += 1
-      if rental.movie.price_code == Movie::NEW_RELEASE && rental.days_rented > 1
-        frequent_renter_points += 1
-      end
-
-      result += "\t" + rental.movie.title + "\t" + rental.charge.to_s + "\n"
+      frequent_renter_points += rental.frequent_renter_points
       total_amount += rental.charge
+      result += "\t" + rental.movie.title + "\t" + rental.charge.to_s + "\n"
     end
 
     result += "Amount owed is #{total_amount}\n"
